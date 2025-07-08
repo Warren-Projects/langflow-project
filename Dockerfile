@@ -1,7 +1,7 @@
 FROM langflowai/langflow:latest
 
 # Install the cloudinary Python package
-RUN pip install cloudinary==1.43.0
+RUN /app/.venv/bin/pip install cloudinary==1.43.0
 
 EXPOSE 7860
 
