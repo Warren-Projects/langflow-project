@@ -1,7 +1,7 @@
 FROM langflowai/langflow:latest
 
-# Use ENTRYPOINT script to install cloudinary once venv exists
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# Copy entrypoint script to a safe path (app-owned folder)
+COPY entrypoint.sh /app/entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+# No need for chmod if script is pre-chmodded locally
+ENTRYPOINT ["/app/entrypoint.sh"]
