@@ -1,7 +1,7 @@
 FROM langflowai/langflow:latest
 
-# Copy entrypoint script to a safe path (app-owned folder)
+# Copy script into writable path
 COPY entrypoint.sh /app/entrypoint.sh
 
-# No need for chmod if script is pre-chmodded locally
-ENTRYPOINT ["/app/entrypoint.sh"]
+# Use sh to bypass executable permission issue
+ENTRYPOINT ["sh", "/app/entrypoint.sh"]
