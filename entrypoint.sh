@@ -1,23 +1,23 @@
 #!/bin/sh
 
-VENV_PIP="/app/.venv/bin/pip"
+# Set default venv path
+VENV_PATH="/app/.venv"
 
-# Wait until the venv is available
-i=0
-while [ ! -x "$VENV_PIP" ] && [ $i -lt 10 ]; do
-  echo "[INFO] Waiting for /app/.venv/bin/pip to become available..."
-  sleep 2
-  i=$((i+1))
-done
+echo "[INFO] Checking Langflow virtual environment..."
 
-if [ ! -x "$VENV_PIP" ]; then
-  echo "[ERROR] Could not find /app/.venv/bin/pip after waiting."
-  exit 1
+# If venv doesn't exist, create it
+if [ ! -d "$VENV_PATH" ]; then
+    echo "[WARNING] Venv not found. Creating a new virtual environment at $VENV_PATH..."
+    python3 -m venv $VENV_PATH
 fi
 
-# Install cloudinary specifically into the internal venv
-echo "[INFO] Installing cloudinary==1.43.0 into /app/.venv..."
-$VENV_PIP install cloudinary==1.43.0
+# Upgrade pip in the venv
+$VENV_PATH/bin/pip install --upgrade pip
 
+# Install cloudinary in the venv
+echo "[INFO] Installing cloudinary in Langflow venv..."
+$VENV_PATH/bin/pip install cloudinary==1.43.0
+
+# Start Langflow using the system-level command (Langflow image already handles .venv activation)
 echo "[INFO] Starting Langflow..."
 exec langflow run --host 0.0.0.0 --port 7860
