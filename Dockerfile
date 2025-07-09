@@ -1,7 +1,8 @@
 FROM langflowai/langflow:latest
 
-# Copy script into writable path
-COPY entrypoint.sh /app/entrypoint.sh
+RUN pip install cloudinary
 
-# Use sh to bypass executable permission issue
-ENTRYPOINT ["sh", "/app/entrypoint.sh"]
+EXPOSE 7860
+
+CMD ["langflow", "run", "--host", "0.0.0.0", "--port", "7860"]
+

@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   langflow:
-    build: .
+    image: langflowai/langflow:latest
     ports:
       - "7860:7860"
     environment:
@@ -24,4 +24,3 @@ services:
 volumes:
   caddy_data:
   caddy_config:
-  
