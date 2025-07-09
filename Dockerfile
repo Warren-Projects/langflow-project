@@ -14,7 +14,7 @@ USER langflow
 
 # 4. Copy application files
 WORKDIR /app
-COPY --chown=langflow:langflow 
+# COPY --chown=langflow:langflow 
 
 EXPOSE 7860
 
