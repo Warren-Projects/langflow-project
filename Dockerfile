@@ -5,6 +5,7 @@ RUN /app/.venv/bin/python -m ensurepip --upgrade
 
 # Install the cloudinary module using the pip from the virtual environment
 RUN /app/.venv/bin/python -m pip install cloudinary
+RUN /app/.venv/bin/python -m pip install PyPDF2
 
 # Set the environment variable to use the virtual environment’s Python by default
 ENV PATH="/app/.venv/bin:$PATH"
